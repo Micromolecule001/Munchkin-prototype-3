@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
 router.delete('/:id', (req, res) => {
     res.send('DELETE a single workout');
 });
-
+    
 // UPDATE a single workout
 router.patch('/:id', (req, res) => {
     res.send('UPDATE a single workout');
