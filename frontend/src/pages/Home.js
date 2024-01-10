@@ -1,21 +1,44 @@
 import { useEffect, useState } from "react";
 
+// Components
+import WorkoutDetails from "../components/WorkoutDetails";
+
 const Home = () => {
-    return (
 
-        useEffect(() => {
-            const fetchItems = async () => {
-                const data = await fetch('https://api.github.com/users');
-                const items = await data.json();
-                console.log(items);
+    const [workouts, setWorkouts] = useState([]);
+    
+    useEffect(() => {
+        const fetchWorkouts = async () => {
+            const response = await fetch('api/workouts');
+
+            if (response.ok) {
+                const text = await response.text();
+                console.log('Response text:', text);
+                try {
+                    const json = JSON.parse(text);
+                    setWorkouts(json);
+                } catch (error) {
+                    console.error('Failed to parse JSON:', error);
+                }
+            } else {
+                console.error('Failed to fetch workouts:', response.status, response.statusText);
             }
-        }, []),
+        }
 
+        fetchWorkouts();
+    }, []); 
+    
+    return (
         <div>
             <h1>Home</h1>
-            <p>This is the home page.</p>
-        </div>
+
+            <div className="workouts">
+                {workouts && workouts.map(workout => (
+                    <WorkoutDetails key={workout._id} workout={workout} />
+                ))}
+            </div>
+        </div> 
     );
-}
+};
 
 export default Home;

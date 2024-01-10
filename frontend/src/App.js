@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <div className="pages">
-
+          
           <Navbar />
 
           <Routes>
