@@ -7,6 +7,6 @@ const WorkoutDetails = ({ workout }) => {
             <p> {workout.createdAt}</p>
         </div>
     );
-}
+} 
 
 export default WorkoutDetails;
